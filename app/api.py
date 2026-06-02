@@ -19,15 +19,23 @@ configure_logging()
 logger = logging.getLogger(__name__)
 
 
+import threading
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Eagerly load dataset on startup (lifespan lifecycle)."""
+    """Eagerly load dataset on startup in the background to prevent blocking port binding."""
     logger.info("Initializing REST API backend...")
-    try:
-        get_restaurants()
-        logger.info("Restaurant database loaded successfully on startup.")
-    except Exception as exc:
-        logger.error("Dataset load failed on startup: %s", exc)
+    
+    def background_load():
+        try:
+            get_restaurants()
+            logger.info("Background restaurant database preload completed successfully.")
+        except Exception as exc:
+            logger.error("Background dataset preload failed: %s", exc)
+
+    thread = threading.Thread(target=background_load, daemon=True)
+    thread.start()
+    
     yield
     logger.info("Shutting down REST API backend...")
 
