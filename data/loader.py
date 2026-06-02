@@ -31,29 +31,29 @@ def load_raw_dataset(
     split: Optional[str] = None,
 ) -> pd.DataFrame:
     """
-    Load the raw dataset from Hugging Face as a pandas DataFrame.
-
-    Retries up to 3 times on transient network errors.
+    Load the raw dataset directly from Hugging Face as a pandas DataFrame.
+    
+    Uses direct HTTP streaming to bypass memory-heavy Hugging Face datasets compiler.
     """
     dataset_id = dataset_id or settings.dataset_id
-    split = split or settings.dataset_split
     last_error: Optional[Exception] = None
 
     for attempt in range(3):
         try:
-            logger.info("Loading dataset %s (split=%s)", dataset_id, split)
-            ds = load_dataset(dataset_id, split=split)
-            return ds.to_pandas()
+            logger.info("Loading dataset %s via direct CSV streaming...", dataset_id)
+            csv_url = f"https://huggingface.co/datasets/{dataset_id}/resolve/main/zomato.csv"
+            df = pd.read_csv(csv_url)
+            return df
         except Exception as exc:
             last_error = exc
             if attempt < 2:
                 wait = 2**attempt
                 logger.warning(
-                    "Dataset load failed (attempt %d/3): %s. Retrying in %ds...",
+                    "Dataset download failed (attempt %d/3): %s. Retrying in %ds...",
                     attempt + 1,
                     exc,
                     wait,
-                )
+                    )
                 time.sleep(wait)
 
     raise DatasetLoadError(
