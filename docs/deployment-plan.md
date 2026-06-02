@@ -42,11 +42,15 @@ Railway is an excellent platform for deploying our high-performance FastAPI serv
    - Click **+ New Project** -> **Deploy from GitHub repo**.
    - Select your project repository.
 3. **Configure the Start Command**:
-   By default, Railway will search for your `requirements.txt` and build a Python environment. To ensure the correct production start command is executed, set the custom start command in Railway:
+   By default, Railway will search for your `requirements.txt` and build a Python environment. We have provided a **Procfile** at the root of the project to automatically configure the start command:
+   ```yaml
+   web: uvicorn app.api:app --host 0.0.0.0 --port ${PORT:-8000}
+   ```
+   If you need to configure or override it manually in the Railway dashboard:
    - Go to the **Settings** tab of your Railway service.
-   - Set the **Start Command** to:
+   - Set the **Start Command** explicitly to:
      ```bash
-     uvicorn app.api:app --host 0.0.0.0 --port $PORT
+     uvicorn app.api:app --host 0.0.0.0 --port ${PORT:-8000}
      ```
 4. **Configure Environment Variables**:
    Under the **Variables** tab, define the following keys:
