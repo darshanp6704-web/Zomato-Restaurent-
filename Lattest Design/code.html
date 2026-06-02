@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GASTRO AI | Zomato AI Concierge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#dae2fd",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-fixed": "#ffdad7",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#a78b7d",
+                        "on-tertiary": "#1000a9",
+                        "inverse-primary": "#9d4300",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface-container-lowest": "#060e20",
+                        "primary-fixed-dim": "#ffb690",
+                        "surface-container-high": "#222a3d",
+                        "primary-fixed": "#ffdbca",
+                        "background": "#0b1326",
+                        "error": "#ffb4ab",
+                        "surface": "#0b1326",
+                        "tertiary-container": "#8c8fff",
+                        "inverse-on-surface": "#283044",
+                        "outline-variant": "#584237",
+                        "surface-variant": "#2d3449",
+                        "on-background": "#dae2fd",
+                        "on-primary-container": "#582200",
+                        "on-secondary-container": "#ffaea8",
+                        "on-tertiary-container": "#1304ac",
+                        "primary-container": "#f97316",
+                        "surface-container-highest": "#2d3449",
+                        "error-container": "#93000a",
+                        "surface-dim": "#0b1326",
+                        "on-error": "#690005",
+                        "on-primary": "#552100",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "surface-container": "#171f33",
+                        "tertiary": "#c0c1ff",
+                        "secondary": "#ffb3ad",
+                        "surface-tint": "#ffb690",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-secondary-fixed": "#410004",
+                        "surface-bright": "#31394d",
+                        "surface-container-low": "#131b2e",
+                        "on-tertiary-fixed": "#07006c",
+                        "secondary-container": "#a40217",
+                        "primary": "#ffb690",
+                        "on-primary-fixed": "#341100",
+                        "on-secondary-fixed-variant": "#930013",
+                        "on-secondary": "#68000a",
+                        "on-surface-variant": "#e0c0b1",
+                        "on-primary-fixed-variant": "#783200"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "container-padding-desktop": "32px",
+                        "container-padding-mobile": "16px",
+                        "unit": "4px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-sm": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "display": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "label-md": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background: linear-gradient(135deg, #0b1326 0%, #171f33 100%);
+            color: #dae2fd;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #1E293B 25%, #2d3449 50%, #1E293B 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Top Navigation Bar (Shared Component Strategy) -->
+<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 h-20 shadow-sm px-container-padding-desktop flex justify-between items-center w-full max-w-[1280px] mx-auto">
+<div class="flex flex-col">
+<h1 class="font-display text-headline-md bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(249,115,22,0.3)]">
+                🍽️ ZOMATO AI
+            </h1>
+<p class="font-label-sm text-on-surface-variant opacity-80">
+                Zomato dataset · Decoupled REST Client · Groq AI explanations
+            </p>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="flex items-center bg-surface-container px-4 py-2 rounded-full border border-white/5 gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+</span>
+<span class="font-label-md text-on-surface">API Connected</span>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-white/5 p-2 rounded-full transition-all">sensors</button>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-container-padding-desktop py-stack-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Search Control Panel (Sidebar equivalent for this UX) -->
+<section class="lg:col-span-4 flex flex-col gap-stack-md">
+<div class="glass-card rounded-xl p-stack-md flex flex-col gap-stack-lg">
+<h2 class="font-headline-md text-primary">Refine Search</h2>
+<!-- Location -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-on-surface-variant">Neighborhood Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+<input class="w-full bg-surface-variant/40 border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface placeholder:text-on-surface-variant/50" placeholder="e.g. Indiranagar, Bangalore" type="text"/>
+</div>
+</div>
+<!-- Budget -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-on-surface-variant">Budget Segment</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-primary text-primary font-label-md hover:bg-primary hover:text-on-primary transition-all">Low Budget</button>
+<button class="px-4 py-2 rounded-full border border-white/10 bg-surface-variant/40 text-on-surface-variant font-label-md hover:border-primary transition-all">Medium</button>
+<button class="px-4 py-2 rounded-full border border-white/10 bg-surface-variant/40 text-on-surface-variant font-label-md hover:border-primary transition-all">High</button>
+</div>
+</div>
+<!-- Cuisine -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-on-surface-variant">Cuisine Preference</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">restaurant_menu</span>
+<input class="w-full bg-surface-variant/40 border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface" placeholder="Search cuisines..." type="text"/>
+</div>
+</div>
+<!-- Rating Slider -->
+<div class="flex flex-col gap-stack-sm">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-on-surface-variant">Minimum Rating</label>
+<span class="bg-primary px-3 py-1 rounded-full text-on-primary font-bold text-label-md glow-orange" id="rating-val">4.2</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="0" oninput="document.getElementById('rating-val').innerText = this.value" step="0.1" type="range" value="4.2"/>
+</div>
+<!-- Custom Notes -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-on-surface-variant">Custom AI Directives</label>
+<textarea class="w-full bg-surface-variant/40 border border-white/10 rounded-lg p-3 text-on-surface resize-none" placeholder="e.g. Must have outdoor seating and good for large groups..." rows="3"></textarea>
+</div>
+<!-- CTA -->
+<button class="w-full bg-gradient-to-r from-[#f97316] to-[#ef4444] text-white font-headline-md py-4 rounded-xl shadow-[0_0_30px_rgba(249,115,22,0.4)] hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">auto_awesome</span>
+                    Find AI Recommendations
+                </button>
+</div>
+<!-- Error State Preview (Hidden by default but shown per prompt requirements) -->
+<div class="glass-card border-red-500/50 p-4 rounded-xl flex items-start gap-3 bg-red-500/5 mt-4">
+<span class="material-symbols-outlined text-red-500 mt-1">error</span>
+<div class="flex flex-col">
+<p class="font-label-md text-red-400 font-bold">FastAPI REST API Backend Offline</p>
+<p class="text-label-sm text-red-300/70">Connect local client or run 'make run-backend' to sync live Zomato clusters.</p>
+</div>
+</div>
+</section>
+<!-- Main Results Canvas -->
+<section class="lg:col-span-8 flex flex-col gap-stack-lg">
+<!-- AI Insights Summary Banner -->
+<div class="relative overflow-hidden glass-card rounded-2xl p-stack-lg border-primary/20 bg-primary/5">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+<div class="flex flex-col gap-stack-sm relative z-10">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">psychology</span>
+<h3 class="font-headline-md">AI Curator Insight</h3>
+</div>
+<p class="font-body-lg text-on-surface opacity-90 leading-relaxed">
+                        Based on your interest in <span class="text-primary font-bold">Fine Dining</span> in <span class="text-primary font-bold">Indiranagar</span>, I've prioritized spots with high culinary consistency and specific "special occasion" markers in recent review datasets. These 12 matches reflect a 94% alignment with your taste profile.
+                    </p>
+</div>
+</div>
+<!-- Results Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Restaurant Card 1 -->
+<div class="group relative glass-card rounded-2xl overflow-hidden hover:scale-[1.02] transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A high-end modern restaurant interior with elegant wooden tables, minimalist pendant lighting, and large windows overlooking a lush city neighborhood. The atmosphere is sophisticated and moody, with warm candlelight reflecting off polished surfaces and deep charcoal accents. Professional architectural photography style with soft bokeh." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaz8pOJYuQlwgbQa4iysXYducMymdPilPXf7JJJR9Gf3CFNx2MjwNzHqSjOQ1YTVtn9U6Wa74bIbQyQgC5Bz8PAks9gLtadE2ZFGMwMs9H9zz62xC9prgEe4ELMguqEyY-qXig8uNY81IUT-gVK5E3AVz_P0_l1nlWjMBV_WXoDIWSeTBblIzq78t6gdH-Lb-CaoXEwN0yd5PhognNOVDW7Bg7Ldc2zSQ8fwdPJQHWHTjWrcsKGddThdPdOToJBqTdrqL5wM2zwtp7"/>
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded-full font-bold shadow-lg">#1 Rank</div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<h4 class="font-headline-md text-on-surface">Happy Endings · Bellandur</h4>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="flex items-center gap-1 text-primary-fixed-dim font-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                4.9
+                            </span>
+<span class="w-1 h-1 rounded-full bg-on-surface-variant/30"></span>
+<span class="text-on-surface-variant font-label-md">Continental, Asian</span>
+<span class="w-1 h-1 rounded-full bg-on-surface-variant/30"></span>
+<span class="text-primary-fixed-dim font-label-md">$$$</span>
+</div>
+<!-- AI Reasoning Accordion -->
+<div class="mt-4 border border-primary/20 rounded-xl bg-primary/5 p-3">
+<details class="group/ai">
+<summary class="list-none flex justify-between items-center cursor-pointer">
+<span class="font-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                                        Why this match?
+                                    </span>
+<span class="material-symbols-outlined text-primary group-open/ai:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-3 text-label-md text-on-surface-variant leading-snug border-t border-primary/10 pt-2">
+                                    Our sentiment analysis identifies a 40% surge in "unmatched ambiance" mentions this month. Combined with your preference for quiet fine dining, the secluded mezzanine level here makes it a top-tier recommendation.
+                                </div>
+</details>
+</div>
+</div>
+</div>
+<!-- Restaurant Card 2 -->
+<div class="group relative glass-card rounded-2xl overflow-hidden hover:scale-[1.02] transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A trendy urban bistro with exposed brick walls, industrial metal fixtures, and vibrant greenery hanging from the ceiling. Warm Edison bulbs cast a cozy glow over marble tabletops where beautifully plated artisanal dishes are served. The mood is lively and modern, capturing a high-end social dining experience with deep blues and burnt orange tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAY2T2DfesusVmQb4iyyoKCaX8TjXMql7lMF4MCU6PsGcGkeCcgPxw5Tot9jloMQNlxtp1lB0vKClrItdfXLXJCL31_oItfwoYaumoW4Ap_eIN2chYokwy-hkpr5CEUdkDn517Y1GZ2exch2VbWCo45mEU1na-CtcDFGqUDesYxlIBU7H9OxDFthBYcL7FBRs2qd0mULPsZOy-uUeek6-ohjjd2u5Plc_365xjOr17f_mlmUzVp5K4XLeyDohyPr4Rsnpv5BqUY7pd"/>
+<div class="absolute top-4 left-4 bg-surface-container-high text-on-surface px-3 py-1 rounded-full font-bold shadow-lg border border-white/10">#2 Rank</div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm">
+<h4 class="font-headline-md text-on-surface">The Salted Rim · Indiranagar</h4>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="flex items-center gap-1 text-primary-fixed-dim font-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                4.7
+                            </span>
+<span class="w-1 h-1 rounded-full bg-on-surface-variant/30"></span>
+<span class="text-on-surface-variant font-label-md">Mexican Fusion</span>
+<span class="w-1 h-1 rounded-full bg-on-surface-variant/30"></span>
+<span class="text-primary-fixed-dim font-label-md">$$$</span>
+</div>
+<div class="mt-4 border border-primary/20 rounded-xl bg-primary/5 p-3">
+<details class="group/ai">
+<summary class="list-none flex justify-between items-center cursor-pointer">
+<span class="font-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                                        Why this match?
+                                    </span>
+<span class="material-symbols-outlined text-primary group-open/ai:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-3 text-label-md text-on-surface-variant leading-snug border-t border-primary/10 pt-2">
+                                    Zomato cluster data indicates a strong correlation between users with your 'Fine Dining' history and this establishment's unique tequila pairing experience. AI confidence score: 88%.
+                                </div>
+</details>
+</div>
+</div>
+</div>
+<!-- Loading Skeleton States -->
+<div class="glass-card rounded-2xl overflow-hidden p-0 h-[380px] opacity-40">
+<div class="shimmer w-full h-48"></div>
+<div class="p-stack-md flex flex-col gap-stack-md">
+<div class="shimmer h-8 w-3/4 rounded-lg"></div>
+<div class="flex gap-2">
+<div class="shimmer h-4 w-12 rounded-lg"></div>
+<div class="shimmer h-4 w-24 rounded-lg"></div>
+</div>
+<div class="shimmer h-16 w-full rounded-xl mt-2"></div>
+</div>
+</div>
+<div class="glass-card rounded-2xl overflow-hidden p-0 h-[380px] opacity-40">
+<div class="shimmer w-full h-48"></div>
+<div class="p-stack-md flex flex-col gap-stack-md">
+<div class="shimmer h-8 w-1/2 rounded-lg"></div>
+<div class="flex gap-2">
+<div class="shimmer h-4 w-12 rounded-lg"></div>
+<div class="shimmer h-4 w-24 rounded-lg"></div>
+</div>
+<div class="shimmer h-16 w-full rounded-xl mt-2"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component Strategy) -->
+<footer class="w-full flex flex-col md:flex-row justify-between items-center px-container-padding-desktop border-t border-outline-variant/20 py-stack-lg mt-stack-lg bg-surface-container-lowest">
+<div class="flex flex-col gap-2 mb-4 md:mb-0">
+<span class="font-display text-label-md text-on-surface-variant uppercase tracking-wider">© 2024 GASTRO AI - PRECISION GASTRONOMY</span>
+<p class="text-label-sm text-on-surface-variant/50">Built with Groq LPU™ &amp; Zomato Real-time Feed</p>
+</div>
+<div class="flex gap-stack-md">
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">API Status</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+</div>
+</footer>
+<!-- Micro-interactions & Visual Polish -->
+<script>
+        // Custom ripple/glow effect logic could go here
+        console.log('Zomato AI UI Core Initialized');
+
+        // Example interaction for budget pills
+        const budgetButtons = document.querySelectorAll('.budget-btn');
+        budgetButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                budgetButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary', 'border-primary');
+                    b.classList.add('bg-surface-variant/40', 'text-on-surface-variant', 'border-white/10');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+                btn.classList.remove('bg-surface-variant/40', 'text-on-surface-variant', 'border-white/10');
+            });
+        });
+    </script>
+</body></html>
