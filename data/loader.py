@@ -40,9 +40,15 @@ def load_raw_dataset(
 
     for attempt in range(3):
         try:
-            logger.info("Loading dataset %s via direct CSV streaming...", dataset_id)
+            logger.info("Loading dataset %s via memory-optimized CSV streaming...", dataset_id)
             csv_url = f"https://huggingface.co/datasets/{dataset_id}/resolve/main/zomato.csv"
-            df = pd.read_csv(csv_url)
+            cols_to_use = [
+                "name", "address", "location", "cuisines", 
+                "approx_cost(for two people)", "rate", "rest_type", 
+                "online_order", "book_table", "dish_liked", 
+                "listed_in(type)", "listed_in(city)"
+            ]
+            df = pd.read_csv(csv_url, usecols=cols_to_use)
             return df
         except Exception as exc:
             last_error = exc
