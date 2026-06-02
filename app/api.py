@@ -57,6 +57,12 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+def root_check():
+    """Root health endpoint for standard cloud health checkers."""
+    return {"status": "ok", "service": "recommendation-engine", "message": "Zomato AI API is active."}
+
+
 @app.get("/api/health")
 def health_check():
     """Health check endpoint."""
