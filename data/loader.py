@@ -94,6 +94,16 @@ def load_restaurants(*, refresh: Optional[bool] = None) -> list[RestaurantRecord
             return cached
 
     raw_df = load_raw_dataset(refresh=refresh)
+    
+    # Check if we are running in a production or resource-constrained environment
+    import os
+    is_railway = os.getenv("RAILWAY_ENVIRONMENT") is not None
+    is_production = os.getenv("PRODUCTION", "false").lower() == "true"
+    
+    if (is_railway or is_production) and len(raw_df) > 15000:
+        logger.info("Restricting dataset memory footprint by sampling 15,000 rows for resource safety.")
+        raw_df = raw_df.sample(n=15000, random_state=42).reset_index(drop=True)
+
     records = normalize_dataframe(raw_df)
     _save_to_cache(records)
     return records
