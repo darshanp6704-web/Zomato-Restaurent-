@@ -165,9 +165,6 @@ function App() {
           <h1 className="font-display text-headline-md bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(249,115,22,0.3)]">
             🍽️ ZOMATO AI
           </h1>
-          <p className="font-label-sm text-on-surface-variant opacity-80">
-            Zomato dataset · Decoupled REST Client · Groq AI explanations
-          </p>
         </div>
         
         <div className="flex items-center gap-4">
@@ -438,30 +435,7 @@ function App() {
               ))
             )}
 
-            {/* Shimmer Skeletons always visible at 40% opacity in the canvas as per design mockup */}
-            <div className="glass-card rounded-2xl overflow-hidden p-0 h-[380px] opacity-40">
-              <div className="shimmer w-full h-48"></div>
-              <div className="p-stack-md flex flex-col gap-stack-md">
-                <div className="shimmer h-8 w-3/4 rounded-lg"></div>
-                <div className="flex gap-2">
-                  <div className="shimmer h-4 w-12 rounded-lg"></div>
-                  <div className="shimmer h-4 w-24 rounded-lg"></div>
-                </div>
-                <div className="shimmer h-16 w-full rounded-xl mt-2"></div>
-              </div>
-            </div>
 
-            <div className="glass-card rounded-2xl overflow-hidden p-0 h-[380px] opacity-40">
-              <div className="shimmer w-full h-48"></div>
-              <div className="p-stack-md flex flex-col gap-stack-md">
-                <div className="shimmer h-8 w-1/2 rounded-lg"></div>
-                <div className="flex gap-2">
-                  <div className="shimmer h-4 w-12 rounded-lg"></div>
-                  <div className="shimmer h-4 w-24 rounded-lg"></div>
-                </div>
-                <div className="shimmer h-16 w-full rounded-xl mt-2"></div>
-              </div>
-            </div>
 
           </div>
         </section>
