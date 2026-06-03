@@ -48,7 +48,13 @@ def load_raw_dataset(
                 "online_order", "book_table", "dish_liked", 
                 "listed_in(type)", "listed_in(city)"
             ]
-            df = pd.read_csv(csv_url, usecols=cols_to_use)
+            import os
+            is_railway = os.getenv("RAILWAY_ENVIRONMENT") is not None
+            is_production = os.getenv("PRODUCTION", "false").lower() == "true"
+            nrows = 15000 if (is_railway or is_production) else None
+            if nrows:
+                logger.info("Resource limit active: Loading first %d rows of CSV from Hugging Face.", nrows)
+            df = pd.read_csv(csv_url, usecols=cols_to_use, nrows=nrows)
             return df
         except Exception as exc:
             last_error = exc

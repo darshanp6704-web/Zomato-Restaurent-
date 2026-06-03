@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-CACHE_DIR = PROJECT_ROOT / "data" / "cache"
+CACHE_DIR = PROJECT_ROOT / "data" / "normalized"
 NORMALIZED_CACHE_FILE = CACHE_DIR / "restaurants.parquet"
 
 
